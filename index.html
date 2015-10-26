@@ -1,0 +1,23 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript">
+	
+	<!---- adds captcha validation to my app---->
+function FrameBuilder(formId,appendTo,initialHeight,iframeCode){this.formId=formId;this.initialHeight=initialHeight;this.iframeCode=iframeCode;this.frame=null;this.timeInterval=200;this.appendTo=appendTo||false;this.formSubmitted=0;this.init=function(){this.createFrame();this.addFrameContent(this.iframeCode);};this.createFrame=function(){var tmp_is_ie=!!window.ActiveXObject;var htmlCode="<"+"iframe onload=\"window.parent.scrollTo(0,0)\" src=\"\" allowtransparency=\"true\" frameborder=\"0\" name=\""+this.formId+"\" id=\""+this.formId+"\" style=\"width:100%; height:"+this.initialHeight+"px; border:none;\" scrolling=\"no\"></if"+"rame>";if(this.appendTo===false){document.write(htmlCode);}else{var tmp=document.createElement('div');tmp.innerHTML=htmlCode;var a=this.appendTo;document.getElementById(a).appendChild(tmp.firstChild);}
+this.frame=document.getElementById(this.formId);if(tmp_is_ie===true){try{var iframe=this.frame;var doc=iframe.contentDocument?iframe.contentDocument:(iframe.contentWindow.document||iframe.document);doc.open();doc.write("");}
+catch(err){this.frame.src="javascript:void((function(){document.open();document.domain=\'"+this.getBaseDomain()+"\';document.close();})())";}}
+this.addEvent(this.frame,'load',this.bindMethod(this.setTimer,this));var self=this;if(window.chrome!==undefined){this.frame.onload=function(){try{var doc=this.contentWindow.document;var _jotform=this.contentWindow.JotForm;if(doc!==undefined){var form=doc.getElementById(""+self.formId);self.addEvent(form,"submit",function(){if(_jotform.validateAll()){self.formSubmitted=1;}});}}catch(e){}}}};this.addEvent=function(obj,type,fn){if(obj.attachEvent){obj["e"+type+fn]=fn;obj[type+fn]=function(){obj["e"+type+fn](window.event);};obj.attachEvent("on"+type,obj[type+fn]);}
+else{obj.addEventListener(type,fn,false);}};this.addFrameContent=function(string){string=string.replace(new RegExp('src\\=\\"[^"]*captcha.php\"><\/scr'+'ipt>','gim'),'src="http://api.recaptcha.net/js/recaptcha_ajax.js"></scr'+'ipt><'+'div id="recaptcha_div"><'+'/div>'+'<'+'style>#recaptcha_logo{ display:none;} #recaptcha_tagline{display:none;} #recaptcha_table{border:none !important;} .recaptchatable .recaptcha_image_cell, #recaptcha_table{ background-color:transparent !important; } <'+'/style>'+'<'+'script defer="defer"> window.onload = function(){ Recaptcha.create("6Ld9UAgAAAAAAMon8zjt30tEZiGQZ4IIuWXLt1ky", "recaptcha_div", {theme: "clean",tabindex: 0,callback: function (){'+'if (document.getElementById("uword")) { document.getElementById("uword").parentNode.removeChild(document.getElementById("uword")); } if (window["validate"] !== undefined) { if (document.getElementById("recaptcha_response_field")){ document.getElementById("recaptcha_response_field").onblur = function(){ validate(document.getElementById("recaptcha_response_field"), "Required"); } } } if (document.getElementById("recaptcha_response_field")){ document.getElementsByName("recaptcha_challenge_field")[0].setAttribute("name", "anum"); } if (document.getElementById("recaptcha_response_field")){ document.getElementsByName("recaptcha_response_field")[0].setAttribute("name", "qCap"); }}})'+' }<'+'/script>');string=string.replace(/(type="text\/javascript">)\s+(validate\(\"[^"]*"\);)/,'$1 jTime = setInterval(function(){if("validate" in window){$2clearTimeout(jTime);}}, 1000);');if(string.match('#sublabel_litemode')){string=string.replace('class="form-all"','class="form-all" style="margin-top:0;"');}
+v
+
+
+	
+</script>
+
+
+
+</body>
+</html>
